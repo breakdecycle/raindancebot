@@ -86,9 +86,9 @@ async def on_message(message):
     raining = False
     logger.info("Raining: {}".format(raining))
     while not raining:
-        logger.info("Checking in 5 seconds...")
-        await asyncio.sleep(5)
-        async for log in client.logs_from(message.channel, limit=5, reverse=True):
+        logger.info("Checking in 8 seconds...")
+        await asyncio.sleep(8)
+        async for log in client.logs_from(message.channel, limit=8, reverse=True):
             if message_contains(log, 'raining') and (log.author == message.author):
                 raining = True
                 await notify("It's raining!")
@@ -99,9 +99,9 @@ async def on_message(message):
     address_requested = False
     logger.info("Address requested: {}".format(address_requested))
     while not address_requested:
-        logger.info("Checking in 10 seconds...")
-        await asyncio.sleep(10)
-        async for log in client.logs_from(message.channel, limit=5, reverse=True):
+        logger.info("Checking in 8 seconds...")
+        await asyncio.sleep(8)
+        async for log in client.logs_from(message.channel, limit=8, reverse=True):
             if message_contains(log, 'send_address') and (log.author == message.author):
                 address_requested = True
                 await notify("Sending your address!")
@@ -111,7 +111,7 @@ async def on_message(message):
 
     # Wait for reaction
     logger.info("Waiting for reaction...")
-    private_message = await client.wait_for_message(timeout=15, author=message.author)
+    private_message = await client.wait_for_message(timeout=20, author=message.author)
     print_message(private_message)
     regex = re.search(r"<\S{22,}>", private_message.content)
     if regex is not None:
